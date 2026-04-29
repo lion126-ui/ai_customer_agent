@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>AI客服系统</title>
+</head>
+<body>
+
+<h2>AI客服 + 分级处理</h2>
+
+<input id="msg" style="width:300px;">
+<button onclick="send()">发送</button>
+
+<pre id="output"></pre>
+
+<script>
+function send(){
+    fetch("http://localhost:5000/chat",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({message:document.getElementById("msg").value})
+    })
+    .then(r=>r.json())
+    .then(d=>{
+        document.getElementById("output").innerText=JSON.stringify(d,null,2)
+    })
+}
+</script>
+
+</body>
+</html>
